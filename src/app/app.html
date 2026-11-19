@@ -1,0 +1,105 @@
+<div class="container py-5">
+  <div class="card shadow-lg border-0 rounded-4 mx-auto" style="max-width: 500px;">
+    
+    <!-- Cabeçalho do Card -->
+    <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+      <h4 class="mb-0 fw-bold">Cálculo de Média Escolar</h4>
+    </div>
+
+    <div class="card-body p-4">
+      
+      <!-- Campo Nome -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-secondary">Nome do Aluno</label>
+        <input 
+          type="text" 
+          class="form-control form-control-lg" 
+          placeholder="Digite o nome completo..."
+          [(ngModel)]="nome">
+      </div>
+
+      <!-- Campos de Notas lado a lado -->
+      <div class="row g-2 mb-3">
+        <div class="col-4">
+          <label class="form-label fw-semibold text-secondary">Nota 1</label>
+          <input 
+            type="number" 
+            class="form-control text-center fw-bold" 
+            placeholder="0.0"
+            [(ngModel)]="n1" 
+            min="0" max="10">
+        </div>
+
+        <div class="col-4">
+          <label class="form-label fw-semibold text-secondary">Nota 2</label>
+          <input 
+            type="number" 
+            class="form-control text-center fw-bold" 
+            placeholder="0.0"
+            [(ngModel)]="n2" 
+            min="0" max="10">
+        </div>
+
+        <div class="col-4">
+          <label class="form-label fw-semibold text-secondary">Nota 3</label>
+          <input 
+            type="number" 
+            class="form-control text-center fw-bold" 
+            placeholder="0.0"
+            [(ngModel)]="n3" 
+            min="0" max="10">
+        </div>
+      </div>
+
+      <!-- Mensagem de Erro -->
+      @if (mensagemErro) {
+        <div class="alert alert-danger py-2 text-center fw-medium" role="alert">
+          {{ mensagemErro }}
+        </div>
+      }
+
+      <!-- Botões de Ação -->
+      <div class="d-grid gap-2 d-md-flex mt-4">
+        <button 
+          (click)="calcularMedia()" 
+          class="btn btn-success btn-lg flex-fill fw-bold shadow-sm">
+          Calcular Média
+        </button>
+        <button 
+          (click)="limparFormulario()" 
+          class="btn btn-outline-secondary btn-lg px-4">
+          Limpar
+        </button>
+      </div>
+
+      <!-- Área de Resultado -->
+      @if (exibirResultado) {
+        <div class="mt-4 p-3 bg-light rounded-3 border">
+          <h6 class="text-uppercase text-muted fw-bold mb-3 border-bottom pb-2">
+            Resultado Final
+          </h6>
+          
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-secondary">Aluno:</span>
+            <span class="fw-bold text-dark">{{ nome }}</span>
+          </div>
+
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-secondary">Média Final:</span>
+            <span class="fs-5 fw-bold text-primary">{{ mediaFinal | number:'1.1-1' }}</span>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+            <span class="text-secondary">Situação:</span>
+            <span 
+              class="badge fs-6 px-3 py-2" 
+              [style.background-color]="corSituacao">
+              {{ situacao }}
+            </span>
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+</div>
